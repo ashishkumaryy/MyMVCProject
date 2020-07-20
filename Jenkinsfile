@@ -8,7 +8,7 @@ pipeline {
 				}
 				stage('Nuget-Restore'){
 					steps{
-						bat "\"C:\\Users\\ashis\\Downloads\\nuget.exe restore MyMVCProject.sln\""				
+						bat "\"nuget restore MyMVCProject.sln\""				
 					}
 				}
 				stage('Build') {
