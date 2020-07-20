@@ -6,8 +6,13 @@ pipeline {
 						checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '825fc4d4-4161-4170-9587-28a936f82af6', url: 'https://github.com/ashishkumaryy/MyMVCProject']]])
 					}
 				}
+				stage('Nuget-Restore'){
+					steps{
+						bat "\"C:\Users\ashis\Downloads\nuget.exe restore MyMVCProject.sln\""				
+					}
+				}
 				stage('Build') {
-    					steps {
+    					steps {					
     					    bat "\"${tool 'MSBuild'}\" MyMVCProject.sln /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:SkipInvalidConfigurations=true /t:build /p:Configuration=Release /p:Platform=\"Any CPU\" /p:DeleteExistingFiles=True /p:publishUrl=c:\\inetpub\\wwwroot"
     					}
 				}
